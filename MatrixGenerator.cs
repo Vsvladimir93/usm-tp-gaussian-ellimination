@@ -68,7 +68,7 @@ namespace LinearEquations
 				matrix[row] = new Rational[size + 1];
 				for (int col = 0; col < size + 1; col++)
 				{
-					matrix[row][col] = Util.RandomRational(-10, 10);
+					matrix[row][col] = Util.RandomRational(-3, 3);
 				}
 			}
 			return matrix;

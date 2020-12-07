@@ -132,8 +132,8 @@ namespace LinearEquations
 				for (int j = 0; j < matrix[i].Length; j++)
 				{
 					delimiter = (j == 0 || j == matrix.Length) ? '|' : ' ';
-
-					Console.Write("{0} {1}\t", delimiter, matrix[i][j]);
+					string column = string.Format("{0} {1,10}", delimiter, matrix[i][j]);
+					Console.Write(column);
 				}
 				Console.Write("|\n");
 			}
