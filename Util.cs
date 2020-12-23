@@ -59,22 +59,33 @@ namespace StudentsApp
 
 		private static bool ParseRational(string input, out Rational result)
 		{
+			int numerator = 0;
+			int denominator = 0;
 			bool matches = rationalFormats.Matches(input).Count == 1;
 			if (matches)
 			{
+				string[] digits;
 				switch (true)
 				{
 					case true when input.Contains('/'):
-						string[] digitsSlash = input.Split('/');
-						result = new Rational(int.Parse(digitsSlash[0]), int.Parse(digitsSlash[1]));
+						digits = input.Split('/');
+						result = new Rational(int.Parse(digits[0]), int.Parse(digits[1]));
 						break;
 					case true when input.Contains('.'):
-						string[] digitsDot = input.Split('.');
-						result = new Rational(int.Parse(digitsDot[0]), int.Parse(digitsDot[1]));
+						digits = input.Split('.');
+
+						denominator = (int) Math.Pow(10, digits[1].Length);
+						numerator = int.Parse(digits[0]) * denominator + int.Parse(digits[1]);
+
+						result = new Rational(numerator, denominator);
 						break;
 					case true when input.Contains(','):
-						string[] digitsComma = input.Split(',');
-						result = new Rational(int.Parse(digitsComma[0]), int.Parse(digitsComma[1]));
+						digits = input.Split(',');
+
+						denominator = (int)Math.Pow(10, digits[1].Length);
+						numerator = int.Parse(digits[0]) * denominator + int.Parse(digits[1]);
+
+						result = new Rational(numerator, denominator);
 						break;
 					default:
 						result = new Rational(int.Parse(input));

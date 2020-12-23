@@ -91,6 +91,7 @@ namespace LinearEquations
 			KeyValuePair<Result, Rational> rowResult = KeyValuePair.Create(Result.CONTINUE, new Rational(0));
 			for (int row = 0; row < initialState.Length; row++)
 			{
+
 				rowResult = CheckRow(initialState, transformedMatrix, row);
 				if (rowResult.Key != Result.CONTINUE)
 					break;
@@ -108,10 +109,17 @@ namespace LinearEquations
 			{
 				rowResult += initialState[row][col] * transformedMatrix[col][transformedMatrix[row].Length - 1];
 			}
-
-			if (rowResult == new Rational(0))
+			
+			Rational checkManySolutions = new Rational(0);
+			for (int col = 0; col < initialState[row].Length; col++)
 			{
-				return KeyValuePair.Create(Result.MANY_SOLUTIONS, rowResult);
+				checkManySolutions += transformedMatrix[row][col];
+			}
+
+
+			if (checkManySolutions == new Rational(0))
+			{
+				return KeyValuePair.Create(Result.MANY_SOLUTIONS, checkManySolutions);
 			}
 			else if (rowResult == initialState[row][initialState[row].Length - 1])
 			{
